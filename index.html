@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetailMax Equity Check</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #0a1628;
+            color: #ffffff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 24px 16px;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 520px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            margin-bottom: 28px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #ffd54f;
+        }
+
+        h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: 2px; }
+        .sub { font-size: 0.82rem; color: #78909c; margin-top: 4px; }
+
+        /* --- SECTIONS --- */
+        .section { margin-bottom: 20px; }
+
+        .section-title {
+            font-size: 0.88rem; font-weight: 700; color: #ffd54f;
+            margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+
+        .badge {
+            background-color: #00bfa5; color: #0a1628;
+            padding: 2px 8px; border-radius: 12px;
+            font-size: 0.72rem; font-weight: 700;
+        }
+
+        /* --- INPUTS --- */
+        .field { margin-bottom: 12px; }
+
+        label {
+            font-size: 0.78rem; font-weight: 600; color: #78909c;
+            margin-bottom: 4px; display: block;
+            text-transform: uppercase; letter-spacing: 0.4px;
+        }
+
+        input[type="text"] {
+            background-color: #111d33; border: 2px solid #1a2d47;
+            color: #fff; padding: 10px 14px; border-radius: 8px;
+            font-family: 'Inter', sans-serif; font-size: 1rem;
+            width: 100%; outline: none; transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus { border-color: #00bfa5; }
+        input::placeholder { color: #3a4f68; }
+
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+        .hint {
+            font-size: 0.68rem; color: #3a4f68; font-style: italic;
+            margin-top: 2px;
+        }
+
+        /* --- DEBT SECTION --- */
+        .debt-card {
+            background: #111d33; border-radius: 10px;
+            padding: 16px; border: 1px solid #1a2d47;
+        }
+
+        .debt-card .field:last-child { margin-bottom: 0; }
+
+        .debt-total {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 12px; padding: 10px 14px; background: #0d1a2a;
+            border-radius: 8px; border: 1px solid #1a2d47;
+        }
+
+        .debt-total .dt-label {
+            font-size: 0.82rem; font-weight: 600; color: #78909c;
+            text-transform: uppercase;
+        }
+
+        .debt-total .dt-value {
+            font-size: 1.2rem; font-weight: 800; color: #ff5252;
+        }
+
+        /* --- RESULT CARD --- */
+        .result-card {
+            background: linear-gradient(135deg, #111d33, #0d1a2a);
+            border-radius: 12px; padding: 24px; text-align: center;
+            border: 2px solid #1a2d47; transition: border-color 0.3s;
+        }
+
+        .result-card.strong { border-color: #00bfa5; }
+        .result-card.moderate { border-color: #ffd54f; }
+        .result-card.low { border-color: #ff9800; }
+        .result-card.negative { border-color: #ff5252; }
+
+        .eq-pct {
+            font-size: 3.5rem; font-weight: 800;
+            transition: color 0.3s;
+        }
+
+        .eq-pct.strong { color: #00bfa5; }
+        .eq-pct.moderate { color: #ffd54f; }
+        .eq-pct.low { color: #ff9800; }
+        .eq-pct.negative { color: #ff5252; }
+
+        .eq-label {
+            font-size: 0.82rem; font-weight: 600; color: #78909c;
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
+        }
+
+        .eq-dollars {
+            font-size: 1.1rem; font-weight: 700; color: #b0bec5;
+            margin-top: 4px;
+        }
+
+        .eq-verdict {
+            font-size: 0.88rem; font-weight: 700; margin-top: 10px;
+            padding: 6px 16px; border-radius: 20px; display: inline-block;
+        }
+
+        .eq-verdict.strong { background: rgba(0,191,165,0.15); color: #00bfa5; }
+        .eq-verdict.moderate { background: rgba(255,213,79,0.15); color: #ffd54f; }
+        .eq-verdict.low { background: rgba(255,152,0,0.15); color: #ff9800; }
+        .eq-verdict.negative { background: rgba(255,82,82,0.15); color: #ff5252; }
+
+        /* --- BREAKDOWN --- */
+        .breakdown {
+            margin-top: 16px; background: #111d33; border-radius: 10px;
+            padding: 16px; border: 1px solid #1a2d47;
+        }
+
+        .breakdown-title {
+            font-size: 0.78rem; font-weight: 700; color: #00bfa5;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .bk-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 5px 0; font-size: 0.85rem;
+        }
+
+        .bk-row .bk-label { color: #78909c; }
+        .bk-row .bk-val { color: #b0bec5; font-weight: 600; }
+        .bk-row.total { border-top: 1px solid #1a2d47; margin-top: 6px; padding-top: 8px; }
+        .bk-row.total .bk-label { color: #ffd54f; font-weight: 700; }
+        .bk-row.total .bk-val { color: #ffd54f; font-weight: 800; }
+        .bk-row.equity .bk-label { color: #00bfa5; font-weight: 700; }
+
+        /* --- RETAILMAX FIT --- */
+        .fit-bar {
+            margin-top: 16px; padding: 14px 16px; border-radius: 10px;
+            border: 1px solid #1a2d47; background: #111d33;
+        }
+
+        .fit-title {
+            font-size: 0.78rem; font-weight: 700; color: #ffd54f;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .fit-text { font-size: 0.82rem; color: #b0bec5; line-height: 1.5; }
+
+        /* --- BUTTONS --- */
+        .actions {
+            display: flex; gap: 10px; justify-content: center;
+            margin-top: 20px; flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            border: none; padding: 10px 20px; border-radius: 8px;
+            font-family: 'Inter', sans-serif; font-size: 0.85rem;
+            font-weight: 700; cursor: pointer; transition: all 0.2s;
+        }
+
+        .btn-reset { background: #1a2d47; color: #78909c; border: 2px solid #2a3f5f; }
+        .btn-reset:hover { color: #ff5252; border-color: #ff5252; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 480px) {
+            h1 { font-size: 1.3rem; }
+            .eq-pct { font-size: 2.8rem; }
+            .row-2 { grid-template-columns: 1fr; }
+        }
+
+        /* --- PRINT --- */
+        @media print {
+            body { background: #fff; color: #000; }
+            .result-card, .breakdown, .debt-card, .fit-bar {
+                background: #fff; border-color: #ccc;
+            }
+            .eq-pct, .eq-verdict, .eq-dollars { color: #000 !important; }
+            .bk-row .bk-label, .bk-row .bk-val { color: #333; }
+            .actions { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RETAILMAX EQUITY CHECK</h1>
+            <div class="sub">Quick equity qualification for Lead Managers</div>
+        </header>
+
+        <!-- === PROPERTY VALUE === -->
+        <div class="section">
+            <div class="section-title">Property Value</div>
+            <div class="field">
+                <label>Estimated Property Value (ARV)</label>
+                <input type="text" id="arv" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                <div class="hint">Use avg of Redfin, Zillow, REI â or best estimate</div>
+            </div>
+        </div>
+
+        <!-- === DEBTS & ENCUMBRANCES === -->
+        <div class="section">
+            <div class="section-title">
+                Debts & Encumbrances
+                <span class="badge" id="debtBadge">$0 total</span>
+            </div>
+            <div class="debt-card">
+                <div class="field">
+                    <label>1st Mortgage Balance</label>
+                    <input type="text" id="mort1" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                </div>
+                <div class="field">
+                    <label>2nd Mortgage / HELOC</label>
+                    <input type="text" id="mort2" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                </div>
+                <div class="row-2">
+                    <div class="field">
+                        <label>Back Taxes</label>
+                        <input type="text" id="taxes" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                    </div>
+                    <div class="field">
+                        <label>Tax Liens</label>
+                        <input type="text" id="taxLiens" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                    </div>
+                </div>
+                <div class="row-2">
+                    <div class="field">
+                        <label>HOA Arrears</label>
+                        <input type="text" id="hoa" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                    </div>
+                    <div class="field">
+                        <label>Judgments / Other Liens</label>
+                        <input type="text" id="judgments" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                    </div>
+                </div>
+                <div class="debt-total">
+                    <span class="dt-label">Total Payoff</span>
+                    <span class="dt-value" id="totalDebt">$0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- === RESULT === -->
+        <div class="section">
+            <div class="section-title">Equity Position</div>
+            <div class="result-card" id="resultCard">
+                <div class="eq-label">Equity Percentage</div>
+                <div class="eq-pct" id="eqPct">â</div>
+                <div class="eq-dollars" id="eqDollars">$0 equity</div>
+                <div class="eq-verdict" id="eqVerdict" style="display:none;">â</div>
+            </div>
+
+            <!-- BREAKDOWN -->
+            <div class="breakdown">
+                <div class="breakdown-title">Breakdown</div>
+                <div class="bk-row">
+                    <span class="bk-label">Property Value</span>
+                    <span class="bk-val" id="bkArv">$0</span>
+                </div>
+                <div class="bk-row">
+                    <span class="bk-label">1st Mortgage</span>
+                    <span class="bk-val" id="bkMort1">$0</span>
+                </div>
+                <div class="bk-row">
+                    <span class="bk-label">2nd Mortgage / HELOC</span>
+                    <span class="bk-val" id="bkMort2">$0</span>
+                </div>
+                <div class="bk-row">
+                    <span class="bk-label">Back Taxes</span>
+                    <span class="bk-val" id="bkTaxes">$0</span>
+                </div>
+                <div class="bk-row">
+                    <span class="bk-label">Tax Liens</span>
+                    <span class="bk-val" id="bkTaxLiens">$0</span>
+                </div>
+                <div class="bk-row">
+                    <span class="bk-label">HOA Arrears</span>
+                    <span class="bk-val" id="bkHoa">$0</span>
+                </div>
+                <div class="bk-row">
+                    <span class="bk-label">Judgments / Other</span>
+                    <span class="bk-val" id="bkJudgments">$0</span>
+                </div>
+                <div class="bk-row total">
+                    <span class="bk-label">Total Payoff</span>
+                    <span class="bk-val" id="bkTotal">$0</span>
+                </div>
+                <div class="bk-row equity">
+                    <span class="bk-label">Net Equity</span>
+                    <span class="bk-val" id="bkEquity" style="color:#00bfa5;">$0</span>
+                </div>
+            </div>
+
+            <!-- RETAILMAX FIT -->
+            <div class="fit-bar" id="fitBar">
+                <div class="fit-title">RetailMax Fit</div>
+                <div class="fit-text" id="fitText">Enter a property value to see qualification.</div>
+            </div>
+        </div>
+
+        <!-- === ACTIONS === -->
+        <div class="actions">
+            <button type="button" class="btn btn-reset" onclick="resetAll()">&#8635; Reset</button>
+        </div>
+    </div>
+
+    <script>
+        function pn(str) {
+            if (!str) return 0;
+            return parseFloat(str.toString().replace(/[$,%\s]/g, '').trim()) || 0;
+        }
+
+        function fd(amt) {
+            var neg = amt < 0;
+            var abs = Math.abs(Math.round(amt));
+            return (neg ? '-' : '') + '$' + abs.toLocaleString('en-US');
+        }
+
+        function fmtC(el) {
+            var v = pn(el.value);
+            if (el.value.trim() === '') return;
+            el.value = fd(v);
+        }
+
+        function calc() {
+            var arv = pn(document.getElementById('arv').value);
+            var mort1 = pn(document.getElementById('mort1').value);
+            var mort2 = pn(document.getElementById('mort2').value);
+            var taxes = pn(document.getElementById('taxes').value);
+            var taxLiens = pn(document.getElementById('taxLiens').value);
+            var hoa = pn(document.getElementById('hoa').value);
+            var judgments = pn(document.getElementById('judgments').value);
+
+            var totalDebt = mort1 + mort2 + taxes + taxLiens + hoa + judgments;
+            var equity = arv - totalDebt;
+            var eqPct = arv > 0 ? (equity / arv) * 100 : 0;
+
+            // Update debt badge & total
+            document.getElementById('debtBadge').textContent = fd(totalDebt) + ' total';
+            document.getElementById('totalDebt').textContent = fd(totalDebt);
+
+            // Breakdown
+            document.getElementById('bkArv').textContent = fd(arv);
+            document.getElementById('bkMort1').textContent = fd(mort1);
+            document.getElementById('bkMort2').textContent = fd(mort2);
+            document.getElementById('bkTaxes').textContent = fd(taxes);
+            document.getElementById('bkTaxLiens').textContent = fd(taxLiens);
+            document.getElement"yId('bkHoa').textContent = fd(hoa);
+            document.getElementById('bkJudgments').textContent = fd(judgments);
+            document.getElementById('bkTotal').textContent = fd(totalDebt);
+            document.getElementById('bkEquity').textContent = fd(equity);
+            document.getElementById('bkEquity').style.color = equity >= 0 ? '#00bfa5' : '#ff5252';
+
+            // Result display
+            var pctEl = document.getElementById('eqPct');
+            var dollarsEl = document.getElementById('eqDollars');
+            var verdictEl = document.getElementById('eqVerdict');
+            var cardEl = document.getElementById('resultCard');
+            var fitEl = document.getElementById('fitText');
+
+            if (arv <= 0) {
+                pctEl.textContent = 'â';
+                pctEl.className = 'eq-pct';
+                dollarsEl.textContent = '$0 equity';
+                verdictEl.style.display = 'none';
+                cardEl.className = 'result-card';
+                fitEl.textContent = 'Enter a property value to see qualification.';
+                return;
+            }
+
+            pctEl.textContent = eqPct.toFixed(1) + '%';
+            dollarsEl.textContent = fd(equity) + ' equity';
+
+            var band, label, fit;
+
+            if (eqPct >= 40) {
+                band = 'strong';
+                label = 'Strong Equity';
+                fit = 'Excellent RetailMax candidate. High equity means strong seller position â our system can maximize their return by accessing retail buyers willing to pay 80-100% of appraised value. Plenty of room for our services, closing costs, and seller proceeds.';
+            } else if (eqPct >= 25) {
+                band = 'moderate';
+                label = 'Moderate Equity';
+                fit = 'Workable for RetailMax. Enough equity to cover transaction costs and deliver a meaningful return to the seller. Run it through the full Offer Calculator to confirm the spread works.';
+            } else if (eqPct >= 10) {
+                band = 'low';
+                label = 'Low Equity';
+                fit = 'Tight margins. RetailMax may still work if the property is in good condition and the market is strong, but the seller\'s net proceeds will be limited. Verify with the Offer Calculator â consider whether a short sale or sub-to strategy is a better fit.';
+            } else {
+                band = 'negative';
+                label = eqPct < 0 ? 'Underwater' : 'Minimal Equity';
+                fit = eqPct < 0
+                    ? 'Seller owes more than the property is worth. RetailMax is not viable. Explore short sale, loan modification, sub-to, or other creative strategies. This is not an equity play.'
+                    : 'Virtually no equity. RetailMax is unlikely to work â there\'s not enough spread to cover transaction costs and deliver meaningful proceeds. Explore creative strategies or pass.';
+            }
+
+            pctEl.className = 'eq-pct ' + band;
+            cardEl.className = 'result-card ' + band;
+            verdictEl.textContent = label;
+            verdictEl.className = 'eq-verdict ' + band;
+            verdictEl.style.display = 'inline-block';
+            fitEl.textContent = fit;
+        }
+
+        function resetAll() {
+            document.querySelectorAll('input[type="text"]').forEach(function(el) { el.value = ''; });
+            calc();
+        }
+
+        // Init
+        calc();
+    </script>
+</body>
+</html>
