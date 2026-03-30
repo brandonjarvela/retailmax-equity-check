@@ -221,7 +221,7 @@
             <div class="field">
                 <label>Estimated Property Value (ARV)</label>
                 <input type="text" id="arv" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
-                <div class="hint">Use avg of Redfin, Zillow, REI â or best estimate</div>
+                <div class="hint">Use avg of Redfin, Zillow, REI — or best estimate</div>
             </div>
         </div>
 
@@ -272,9 +272,9 @@
             <div class="section-title">Equity Position</div>
             <div class="result-card" id="resultCard">
                 <div class="eq-label">Equity Percentage</div>
-                <div class="eq-pct" id="eqPct">â</div>
+                <div class="eq-pct" id="eqPct">—</div>
                 <div class="eq-dollars" id="eqDollars">$0 equity</div>
-                <div class="eq-verdict" id="eqVerdict" style="display:none;">â</div>
+                <div class="eq-verdict" id="eqVerdict" style="display:none;">—</div>
             </div>
 
             <!-- BREAKDOWN -->
@@ -386,7 +386,7 @@
             var fitEl = document.getElementById('fitText');
 
             if (arv <= 0) {
-                pctEl.textContent = 'â';
+                pctEl.textContent = '—';
                 pctEl.className = 'eq-pct';
                 dollarsEl.textContent = '$0 equity';
                 verdictEl.style.display = 'none';
@@ -403,7 +403,7 @@
             if (eqPct >= 40) {
                 band = 'strong';
                 label = 'Strong Equity';
-                fit = 'Excellent RetailMax candidate. High equity means strong seller position â our system can maximize their return by accessing retail buyers willing to pay 80-100% of appraised value. Plenty of room for our services, closing costs, and seller proceeds.';
+                fit = 'Excellent RetailMax candidate. High equity means strong seller position — our system can maximize their return by accessing retail buyers willing to pay 80-100% of appraised value. Plenty of room for our services, closing costs, and seller proceeds.';
             } else if (eqPct >= 25) {
                 band = 'moderate';
                 label = 'Moderate Equity';
@@ -411,13 +411,13 @@
             } else if (eqPct >= 10) {
                 band = 'low';
                 label = 'Low Equity';
-                fit = 'Tight margins. RetailMax may still work if the property is in good condition and the market is strong, but the seller\'s net proceeds will be limited. Verify with the Offer Calculator â consider whether a short sale or sub-to strategy is a better fit.';
+                fit = 'Tight margins. RetailMax may still work if the property is in good condition and the market is strong, but the seller\'s net proceeds will be limited. Verify with the Offer Calculator — consider whether a short sale or sub-to strategy is a better fit.';
             } else {
                 band = 'negative';
                 label = eqPct < 0 ? 'Underwater' : 'Minimal Equity';
                 fit = eqPct < 0
                     ? 'Seller owes more than the property is worth. RetailMax is not viable. Explore short sale, loan modification, sub-to, or other creative strategies. This is not an equity play.'
-                    : 'Virtually no equity. RetailMax is unlikely to work â there\'s not enough spread to cover transaction costs and deliver meaningful proceeds. Explore creative strategies or pass.';
+                    : 'Virtually no equity. RetailMax is unlikely to work — there\'s not enough spread to cover transaction costs and deliver meaningful proceeds. Explore creative strategies or pass.';
             }
 
             pctEl.className = 'eq-pct ' + band;
