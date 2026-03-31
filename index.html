@@ -12,91 +12,178 @@
             background-color: #0a1628;
             color: #ffffff;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            padding: 24px 16px;
+            padding: 40px 24px;
             min-height: 100vh;
             line-height: 1.6;
+            font-size: 18px;
         }
 
-        .container { max-width: 520px; margin: 0 auto; }
+        .container { max-width: 760px; margin: 0 auto; }
 
         header {
             text-align: center;
-            margin-bottom: 28px;
-            padding-bottom: 12px;
+            margin-bottom: 36px;
+            padding-bottom: 16px;
             border-bottom: 3px solid #ffd54f;
         }
 
-        h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: 2px; }
-        .sub { font-size: 0.82rem; color: #78909c; margin-top: 4px; }
+        h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: 3px; }
+        .sub { font-size: 1rem; color: #78909c; margin-top: 6px; }
 
         /* --- SECTIONS --- */
-        .section { margin-bottom: 20px; }
+        .section { margin-bottom: 28px; }
 
         .section-title {
-            font-size: 0.88rem; font-weight: 700; color: #ffd54f;
-            margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+            font-size: 1.05rem; font-weight: 700; color: #ffd54f;
+            margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
             text-transform: uppercase; letter-spacing: 0.5px;
         }
 
         .badge {
             background-color: #00bfa5; color: #0a1628;
-            padding: 2px 8px; border-radius: 12px;
-            font-size: 0.72rem; font-weight: 700;
+            padding: 3px 10px; border-radius: 12px;
+            font-size: 0.85rem; font-weight: 700;
         }
 
         /* --- INPUTS --- */
-        .field { margin-bottom: 12px; }
+        .field { margin-bottom: 16px; }
 
         label {
-            font-size: 0.78rem; font-weight: 600; color: #78909c;
-            margin-bottom: 4px; display: block;
+            font-size: 0.92rem; font-weight: 600; color: #78909c;
+            margin-bottom: 6px; display: block;
             text-transform: uppercase; letter-spacing: 0.4px;
         }
 
         input[type="text"] {
             background-color: #111d33; border: 2px solid #1a2d47;
-            color: #fff; padding: 10px 14px; border-radius: 8px;
-            font-family: 'Inter', sans-serif; font-size: 1rem;
+            color: #fff; padding: 14px 18px; border-radius: 10px;
+            font-family: 'Inter', sans-serif; font-size: 1.15rem;
             width: 100%; outline: none; transition: border-color 0.2s;
         }
 
         input[type="text"]:focus { border-color: #00bfa5; }
         input::placeholder { color: #3a4f68; }
 
-        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
         .hint {
-            font-size: 0.68rem; color: #3a4f68; font-style: italic;
-            margin-top: 2px;
+            font-size: 0.82rem; color: #3a4f68; font-style: italic;
+            margin-top: 4px;
+        }
+
+        /* --- ARV SOURCE CARD --- */
+        .arv-card {
+            background: #111d33; border-radius: 12px;
+            padding: 22px; border: 1px solid #1a2d47;
+        }
+        .arv-card .field:last-child { margin-bottom: 0; }
+        .arv-total {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 16px; padding: 14px 18px; background: #0d1a2a;
+            border-radius: 10px; border: 1px solid #1a2d47;
+        }
+        .arv-total .at-label {
+            font-size: 1rem; font-weight: 600; color: #78909c;
+            text-transform: uppercase;
+        }
+        .arv-total .at-value {
+            font-size: 1.4rem; font-weight: 800; color: #00bfa5;
+        }
+        .arv-sources-used {
+            font-size: 0.82rem; color: #3a4f68; font-style: italic;
+            text-align: right; margin-top: 4px;
         }
 
         /* --- DEBT SECTION --- */
         .debt-card {
-            background: #111d33; border-radius: 10px;
-            padding: 16px; border: 1px solid #1a2d47;
+            background: #111d33; border-radius: 12px;
+            padding: 22px; border: 1px solid #1a2d47;
         }
 
         .debt-card .field:last-child { margin-bottom: 0; }
 
         .debt-total {
             display: flex; justify-content: space-between; align-items: center;
-            margin-top: 12px; padding: 10px 14px; background: #0d1a2a;
-            border-radius: 8px; border: 1px solid #1a2d47;
+            margin-top: 16px; padding: 14px 18px; background: #0d1a2a;
+            border-radius: 10px; border: 1px solid #1a2d47;
         }
 
         .debt-total .dt-label {
-            font-size: 0.82rem; font-weight: 600; color: #78909c;
+            font-size: 1rem; font-weight: 600; color: #78909c;
             text-transform: uppercase;
         }
 
         .debt-total .dt-value {
-            font-size: 1.2rem; font-weight: 800; color: #ff5252;
+            font-size: 1.4rem; font-weight: 800; color: #ff5252;
         }
 
         /* --- RESULT CARD --- */
         .result-card {
             background: linear-gradient(135deg, #111d33, #0d1a2a);
-            border-radius: 12px; padding: 24px; text-align: center;
+            border-radius: 14px; padding: 32px; text-align: center;
+            border: 2px solid #1a2d47; transition: border-color 0.3s;
+        }
+
+        .result-card.strong { border-color: #00bfa5; }
+        .result-card.moderate { border-color: #ffd54f; }
+        .result-card.low { border-color: #ff9800; }
+        .rw-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+        .hint {
+            font-size: 0.82rem; color: #3a4f68; font-style: italic;
+            margin-top: 4px;
+        }
+
+        /* --- ARV SOURCE CARD --- */
+        .arv-card {
+            background: #111d33; border-radius: 12px;
+            padding: 22px; border: 1px solid #1a2d47;
+        }
+        .arv-card .field:last-child { margin-bottom: 0; }
+        .arv-total {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 16px; padding: 14px 18px; background: #0d1a2a;
+            border-radius: 10px; border: 1px solid #1a2d47;
+        }
+        .arv-total .at-label {
+            font-size: 1rem; font-weight: 600; color: #78909c;
+            text-transform: uppercase;
+        }
+        .arv-total .at-value {
+            font-size: 1.4rem; font-weight: 800; color: #00bfa5;
+        }
+        .arv-sources-used {
+            font-size: 0.82rem; color: #3a4f68; font-style: italic;
+            text-align: right; margin-top: 4px;
+        }
+
+        /* --- DEBT SECTION --- */
+        .debt-card {
+            background: #111d33; border-radius: 12px;
+            padding: 22px; border: 1px solid #1a2d47;
+        }
+
+        .debt-card .field:last-child { margin-bottom: 0; }
+
+        .debt-total {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 16px; padding: 14px 18px; background: #0d1a2a;
+            border-radius: 10px; border: 1px solid #1a2d47;
+        }
+
+        .debt-total .dt-label {
+            font-size: 1rem; font-weight: 600; color: #78909c;
+            text-transform: uppercase;
+        }
+
+        .debt-total .dt-value {
+            font-size: 1.4rem; font-weight: 800; color: #ff5252;
+        }
+
+        /* --- RESULT CARD --- */
+        .result-card {
+            background: linear-gradient(135deg, #111d33, #0d1a2a);
+            border-radius: 14px; padding: 32px; text-align: center;
             border: 2px solid #1a2d47; transition: border-color 0.3s;
         }
 
@@ -106,7 +193,7 @@
         .result-card.negative { border-color: #ff5252; }
 
         .eq-pct {
-            font-size: 3.5rem; font-weight: 800;
+            font-size: 4.5rem; font-weight: 800;
             transition: color 0.3s;
         }
 
@@ -116,18 +203,18 @@
         .eq-pct.negative { color: #ff5252; }
 
         .eq-label {
-            font-size: 0.82rem; font-weight: 600; color: #78909c;
-            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
+            font-size: 1rem; font-weight: 600; color: #78909c;
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
         }
 
         .eq-dollars {
-            font-size: 1.1rem; font-weight: 700; color: #b0bec5;
-            margin-top: 4px;
+            font-size: 1.3rem; font-weight: 700; color: #b0bec5;
+            margin-top: 6px;
         }
 
         .eq-verdict {
-            font-size: 0.88rem; font-weight: 700; margin-top: 10px;
-            padding: 6px 16px; border-radius: 20px; display: inline-block;
+            font-size: 1.05rem; font-weight: 700; margin-top: 14px;
+            padding: 8px 20px; border-radius: 20px; display: inline-block;
         }
 
         .eq-verdict.strong { background: rgba(0,191,165,0.15); color: #00bfa5; }
@@ -137,19 +224,19 @@
 
         /* --- BREAKDOWN --- */
         .breakdown {
-            margin-top: 16px; background: #111d33; border-radius: 10px;
-            padding: 16px; border: 1px solid #1a2d47;
+            margin-top: 20px; background: #111d33; border-radius: 12px;
+            padding: 22px; border: 1px solid #1a2d47;
         }
 
         .breakdown-title {
-            font-size: 0.78rem; font-weight: 700; color: #00bfa5;
+            font-size: 0.95rem; font-weight: 700; color: #00bfa5;
             text-transform: uppercase; letter-spacing: 0.5px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .bk-row {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 5px 0; font-size: 0.85rem;
+            padding: 7px 0; font-size: 1rem;
         }
 
         .bk-row .bk-label { color: #78909c; }
@@ -161,28 +248,28 @@
 
         /* --- RETAILMAX FIT --- */
         .fit-bar {
-            margin-top: 16px; padding: 14px 16px; border-radius: 10px;
+            margin-top: 20px; padding: 20px 22px; border-radius: 12px;
             border: 1px solid #1a2d47; background: #111d33;
         }
 
         .fit-title {
-            font-size: 0.78rem; font-weight: 700; color: #ffd54f;
+            font-size: 0.95rem; font-weight: 700; color: #ffd54f;
             text-transform: uppercase; letter-spacing: 0.5px;
             margin-bottom: 6px;
         }
 
-        .fit-text { font-size: 0.82rem; color: #b0bec5; line-height: 1.5; }
+        .fit-text { font-size: 1rem; color: #b0bec5; line-height: 1.6; }
 
         /* --- BUTTONS --- */
         .actions {
-            display: flex; gap: 10px; justify-content: center;
-            margin-top: 20px; flex-wrap: wrap;
+            display: flex; gap: 12px; justify-content: center;
+            margin-top: 28px; flex-wrap: wrap;
         }
 
         .btn {
-            display: inline-flex; align-items: center; gap: 6px;
-            border: none; padding: 10px 20px; border-radius: 8px;
-            font-family: 'Inter', sans-serif; font-size: 0.85rem;
+            display: inline-flex; align-items: center; gap: 8px;
+            border: none; padding: 14px 28px; border-radius: 10px;
+            font-family: 'Inter', sans-serif; font-size: 1rem;
             font-weight: 700; cursor: pointer; transition: all 0.2s;
         }
 
@@ -217,11 +304,31 @@
 
         <!-- === PROPERTY VALUE === -->
         <div class="section">
-            <div class="section-title">Property Value</div>
-            <div class="field">
-                <label>Estimated Property Value (ARV)</label>
-                <input type="text" id="arv" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
-                <div class="hint">Use avg of Redfin, Zillow, REI — or best estimate</div>
+            <div class="section-title">
+                Property Value Estimates
+                <span class="badge" id="arvBadge">0 sources</span>
+            </div>
+            <div class="arv-card">
+                <div class="row-2">
+                    <div class="field">
+                        <label>Zillow Estimate</label>
+                        <input type="text" id="valZillow" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                    </div>
+                    <div class="field">
+                        <label>Redfin Estimate</label>
+                        <input type="text" id="valRedfin" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Realtor.com Estimate</label>
+                    <input type="text" id="valRealtor" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                    <div class="hint">Enter values from each source — ARV auto-calculates from the average</div>
+                </div>
+                <div class="arv-total">
+                    <span class="at-label">Avg. ARV</span>
+                    <span class="at-value" id="arvDisplay">$0</span>
+                </div>
+                <div class="arv-sources-used" id="arvSourcesUsed">Enter at least one estimate</div>
             </div>
         </div>
 
@@ -250,56 +357,7 @@
                         <input type="text" id="taxLiens" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
                     </div>
                 </div>
-                <div class="row-2">
-                    <div class="field">
-                        <label>HOA Arrears</label>
-                        <input type="text" id="hoa" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
-                    </div>
-                    <div class="field">
-                        <label>Judgments / Other Liens</label>
-                        <input type="text" id="judgments" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
-                    </div>
-                </div>
-                <div class="debt-total">
-                    <span class="dt-label">Total Payoff</span>
-                    <span class="dt-value" id="totalDebt">$0</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- === RESULT === -->
-        <div class="section">
-            <div class="section-title">Equity Position</div>
-            <div class="result-card" id="resultCard">
-                <div class="eq-label">Equity Percentage</div>
-                <div class="eq-pct" id="eqPct">—</div>
-                <div class="eq-dollars" id="eqDollars">$0 equity</div>
-                <div class="eq-verdict" id="eqVerdict" style="display:none;">—</div>
-            </div>
-
-            <!-- BREAKDOWN -->
-            <div class="breakdown">
-                <div class="breakdown-title">Breakdown</div>
-                <div class="bk-row">
-                    <span class="bk-label">Property Value</span>
-                    <span class="bk-val" id="bkArv">$0</span>
-                </div>
-                <div class="bk-row">
-                    <span class="bk-label">1st Mortgage</span>
-                    <span class="bk-val" id="bkMort1">$0</span>
-                </div>
-                <div class="bk-row">
-                    <span class="bk-label">2nd Mortgage / HELOC</span>
-                    <span class="bk-val" id="bkMort2">$0</span>
-                </div>
-                <div class="bk-row">
-                    <span class="bk-label">Back Taxes</span>
-                    <span class="bk-val" id="bkTaxes">$0</span>
-                </div>
-                <div class="bk-row">
-                    <span class="bk-label">Tax Liens</span>
-                    <span class="bk-val" id="bkTaxLiens">$0</span>
-                </div>
+                <div class="row-2">  </div>
                 <div class="bk-row">
                     <span class="bk-label">HOA Arrears</span>
                     <span class="bk-val" id="bkHoa">$0</span>
@@ -350,7 +408,25 @@
         }
 
         function calc() {
-            var arv = pn(document.getElementById('arv').value);
+            // Compute ARV from source estimates
+            var zVal = pn(document.getElementById('valZillow').value);
+            var rVal = pn(document.getElementById('valRedfin').value);
+            var rlVal = pn(document.getElementById('valRealtor').value);
+            var sources = [zVal, rVal, rlVal].filter(function(v) { return v > 0; });
+            var sourceCount = sources.length;
+            var arv = sourceCount > 0 ? sources.reduce(function(a, b) { return a + b; }, 0) / sourceCount : 0;
+
+            // Update ARV display
+            document.getElementById('arvDisplay').textContent = fd(arv);
+            var sourceNames = [];
+            if (zVal > 0) sourceNames.push('Zillow');
+            if (rVal > 0) sourceNames.push('Redfin');
+            if (rlVal > 0) sourceNames.push('Realtor.com');
+            document.getElementById('arvBadge').textContent = sourceCount + ' source' + (sourceCount !== 1 ? 's' : '');
+            document.getElementById('arvSourcesUsed').textContent = sourceCount > 0
+                ? 'Avg of ' + sourceNames.join(', ')
+                : 'Enter at least one estimate';
+
             var mort1 = pn(document.getElementById('mort1').value);
             var mort2 = pn(document.getElementById('mort2').value);
             var taxes = pn(document.getElementById('taxes').value);
