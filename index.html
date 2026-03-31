@@ -250,7 +250,7 @@
             .row-2 { grid-template-columns: 1fr; }
         }
 
-           /* --- PRINT --- */
+        /* --- PRINT --- */
         @media print {
             body { background: #fff; color: #000; }
             .result-card, .breakdown, .debt-card, .fit-bar {
@@ -474,7 +474,7 @@
             document.getElementById('bkTaxLiens').textContent = fd(taxLiens);
             document.getElementById('bkHoa').textContent = fd(hoa);
             document.getElementById('bkJudgments').textContent = fd(judgments);
-            document.getElentById('bkTotal').textContent = fd(totalDebt);
+            document.getElementById('bkTotal').textContent = fd(totalDebt);
             document.getElementById('bkEquity').textContent = fd(equity);
             document.getElementById('bkEquity').style.color = equity >= 0 ? '#00bfa5' : '#ff5252';
 
@@ -490,7 +490,7 @@
                 pctEl.className = 'eq-pct';
                 dollarsEl.textContent = '$0 equity';
                 verdictEl.style.display = 'none';
-               cardEl.className = 'result-card';
+                cardEl.className = 'result-card';
                 fitEl.textContent = 'Enter a property value to see qualification.';
                 // Reset viability gate
                 var gateReset = document.getElementById('viabilityGate');
