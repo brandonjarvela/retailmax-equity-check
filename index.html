@@ -127,69 +127,6 @@
         .result-card.strong { border-color: #00bfa5; }
         .result-card.moderate { border-color: #ffd54f; }
         .result-card.low { border-color: #ff9800; }
-        .rw-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-        .hint {
-            font-size: 0.82rem; color: #3a4f68; font-style: italic;
-            margin-top: 4px;
-        }
-
-        /* --- ARV SOURCE CARD --- */
-        .arv-card {
-            background: #111d33; border-radius: 12px;
-            padding: 22px; border: 1px solid #1a2d47;
-        }
-        .arv-card .field:last-child { margin-bottom: 0; }
-        .arv-total {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-top: 16px; padding: 14px 18px; background: #0d1a2a;
-            border-radius: 10px; border: 1px solid #1a2d47;
-        }
-        .arv-total .at-label {
-            font-size: 1rem; font-weight: 600; color: #78909c;
-            text-transform: uppercase;
-        }
-        .arv-total .at-value {
-            font-size: 1.4rem; font-weight: 800; color: #00bfa5;
-        }
-        .arv-sources-used {
-            font-size: 0.82rem; color: #3a4f68; font-style: italic;
-            text-align: right; margin-top: 4px;
-        }
-
-        /* --- DEBT SECTION --- */
-        .debt-card {
-            background: #111d33; border-radius: 12px;
-            padding: 22px; border: 1px solid #1a2d47;
-        }
-
-        .debt-card .field:last-child { margin-bottom: 0; }
-
-        .debt-total {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-top: 16px; padding: 14px 18px; background: #0d1a2a;
-            border-radius: 10px; border: 1px solid #1a2d47;
-        }
-
-        .debt-total .dt-label {
-            font-size: 1rem; font-weight: 600; color: #78909c;
-            text-transform: uppercase;
-        }
-
-        .debt-total .dt-value {
-            font-size: 1.4rem; font-weight: 800; color: #ff5252;
-        }
-
-        /* --- RESULT CARD --- */
-        .result-card {
-            background: linear-gradient(135deg, #111d33, #0d1a2a);
-            border-radius: 14px; padding: 32px; text-align: center;
-            border: 2px solid #1a2d47; transition: border-color 0.3s;
-        }
-
-        .result-card.strong { border-color: #00bfa5; }
-        .result-card.moderate { border-color: #ffd54f; }
-        .result-card.low { border-color: #ff9800; }
         .result-card.negative { border-color: #ff5252; }
 
         .eq-pct {
@@ -260,6 +197,36 @@
 
         .fit-text { font-size: 1rem; color: #b0bec5; line-height: 1.6; }
 
+        /* --- VIABILITY GATE --- */
+        .viability-gate {
+            margin-top: 20px; padding: 22px 24px; border-radius: 12px;
+            text-align: center; transition: all 0.3s;
+        }
+        .viability-gate.pass {
+            background: rgba(0,191,165,0.12); border: 2px solid #00bfa5;
+        }
+        .viability-gate.fail {
+            background: rgba(255,82,82,0.12); border: 2px solid #ff5252;
+        }
+        .viability-gate.pending {
+            background: #111d33; border: 2px solid #1a2d47;
+        }
+        .vg-icon { font-size: 2.2rem; margin-bottom: 6px; }
+        .vg-status {
+            font-size: 1.3rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .vg-status.pass { color: #00bfa5; }
+        .vg-status.fail { color: #ff5252; }
+        .vg-status.pending { color: #78909c; }
+        .vg-detail {
+            font-size: 0.95rem; color: #b0bec5; margin-top: 6px; line-height: 1.5;
+        }
+        .vg-threshold {
+            font-size: 0.82rem; color: #3a4f68; font-style: italic;
+            margin-top: 8px;
+        }
+
         /* --- BUTTONS --- */
         .actions {
             display: flex; gap: 12px; justify-content: center;
@@ -283,7 +250,7 @@
             .row-2 { grid-template-columns: 1fr; }
         }
 
-        /* --- PRINT --- */
+           /* --- PRINT --- */
         @media print {
             body { background: #fff; color: #000; }
             .result-card, .breakdown, .debt-card, .fit-bar {
@@ -312,16 +279,16 @@
                 <div class="row-2">
                     <div class="field">
                         <label>Zillow Estimate</label>
-                        <input type="text" id="valZillow" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                        <input type="text" id="valZillow" placeholder="$0" oninput="calc()" onblur="fmtC(this); calc()">
                     </div>
                     <div class="field">
                         <label>Redfin Estimate</label>
-                        <input type="text" id="valRedfin" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                        <input type="text" id="valRedfin" placeholder="$0" oninput="calc()" onblur="fmtC(this); calc()">
                     </div>
                 </div>
                 <div class="field">
                     <label>Realtor.com Estimate</label>
-                    <input type="text" id="valRealtor" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                    <input type="text" id="valRealtor" placeholder="$0" oninput="calc()" onblur="fmtC(this); calc()">
                     <div class="hint">Enter values from each source — ARV auto-calculates from the average</div>
                 </div>
                 <div class="arv-total">
@@ -341,23 +308,72 @@
             <div class="debt-card">
                 <div class="field">
                     <label>1st Mortgage Balance</label>
-                    <input type="text" id="mort1" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                    <input type="text" id="mort1" placeholder="$0" oninput="calc()" onblur="fmtC(this); calc()">
                 </div>
                 <div class="field">
                     <label>2nd Mortgage / HELOC</label>
-                    <input type="text" id="mort2" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                    <input type="text" id="mort2" placeholder="$0" oninput="calc()" onblur="fmtC(this); calc()">
                 </div>
                 <div class="row-2">
                     <div class="field">
                         <label>Back Taxes</label>
-                        <input type="text" id="taxes" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                        <input type="text" id="taxes" placeholder="$0" oninput="calc()" onblur="fmtC(this); calc()">
                     </div>
                     <div class="field">
                         <label>Tax Liens</label>
-                        <input type="text" id="taxLiens" placeholder="$0" oninput="calc()" onblur="fmtC(this)">
+                        <input type="text" id="taxLiens" placeholder="$0" oninput="calc()" onblur="fmtC(this); calc()">
                     </div>
                 </div>
-                <div class="row-2">  </div>
+                <div class="row-2">
+                    <div class="field">
+                        <label>HOA Arrears</label>
+                        <input type="text" id="hoa" placeholder="$0" oninput="calc()" onblur="fmtC(this); calc()">
+                    </div>
+                    <div class="field">
+                        <label>Judgments / Other Liens</label>
+                        <input type="text" id="judgments" placeholder="$0" oninput="calc()" onblur="fmtC(this); calc()">
+                    </div>
+                </div>
+                <div class="debt-total">
+                    <span class="dt-label">Total Payoff</span>
+                    <span class="dt-value" id="totalDebt">$0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- === RESULT === -->
+        <div class="section">
+            <div class="section-title">Equity Position</div>
+            <div class="result-card" id="resultCard">
+                <div class="eq-label">Equity Percentage</div>
+                <div class="eq-pct" id="eqPct">—</div>
+                <div class="eq-dollars" id="eqDollars">$0 equity</div>
+                <div class="eq-verdict" id="eqVerdict" style="display:none;">—</div>
+            </div>
+
+            <!-- BREAKDOWN -->
+            <div class="breakdown">
+                <div class="breakdown-title">Breakdown</div>
+                <div class="bk-row">
+                    <span class="bk-label">Avg. ARV</span>
+                    <span class="bk-val" id="bkArv">$0</span>
+                </div>
+                <div class="bk-row">
+                    <span class="bk-label">1st Mortgage</span>
+                    <span class="bk-val" id="bkMort1">$0</span>
+                </div>
+                <div class="bk-row">
+                    <span class="bk-label">2nd Mortgage / HELOC</span>
+                    <span class="bk-val" id="bkMort2">$0</span>
+                </div>
+                <div class="bk-row">
+                    <span class="bk-label">Back Taxes</span>
+                    <span class="bk-val" id="bkTaxes">$0</span>
+                </div>
+                <div class="bk-row">
+                    <span class="bk-label">Tax Liens</span>
+                    <span class="bk-val" id="bkTaxLiens">$0</span>
+                </div>
                 <div class="bk-row">
                     <span class="bk-label">HOA Arrears</span>
                     <span class="bk-val" id="bkHoa">$0</span>
@@ -380,6 +396,14 @@
             <div class="fit-bar" id="fitBar">
                 <div class="fit-title">RetailMax Fit</div>
                 <div class="fit-text" id="fitText">Enter a property value to see qualification.</div>
+            </div>
+
+            <!-- VIABILITY GATE -->
+            <div class="viability-gate pending" id="viabilityGate">
+                <div class="vg-icon" id="vgIcon">&#9899;</div>
+                <div class="vg-status pending" id="vgStatus">AWAITING DATA</div>
+                <div class="vg-detail" id="vgDetail">Enter property value and debts to check viability.</div>
+                <div class="vg-threshold">Minimum 15% equity required to proceed</div>
             </div>
         </div>
 
@@ -450,7 +474,7 @@
             document.getElementById('bkTaxLiens').textContent = fd(taxLiens);
             document.getElementById('bkHoa').textContent = fd(hoa);
             document.getElementById('bkJudgments').textContent = fd(judgments);
-            document.getElementById('bkTotal').textContent = fd(totalDebt);
+            document.getElentById('bkTotal').textContent = fd(totalDebt);
             document.getElementById('bkEquity').textContent = fd(equity);
             document.getElementById('bkEquity').style.color = equity >= 0 ? '#00bfa5' : '#ff5252';
 
@@ -466,8 +490,15 @@
                 pctEl.className = 'eq-pct';
                 dollarsEl.textContent = '$0 equity';
                 verdictEl.style.display = 'none';
-                cardEl.className = 'result-card';
+               cardEl.className = 'result-card';
                 fitEl.textContent = 'Enter a property value to see qualification.';
+                // Reset viability gate
+                var gateReset = document.getElementById('viabilityGate');
+                gateReset.className = 'viability-gate pending';
+                document.getElementById('vgIcon').innerHTML = '&#9899;';
+                document.getElementById('vgStatus').textContent = 'AWAITING DATA';
+                document.getElementById('vgStatus').className = 'vg-status pending';
+                document.getElementById('vgDetail').textContent = 'Enter property value and debts to check viability.';
                 return;
             }
 
@@ -502,6 +533,26 @@
             verdictEl.className = 'eq-verdict ' + band;
             verdictEl.style.display = 'inline-block';
             fitEl.textContent = fit;
+
+            // --- VIABILITY GATE (15% threshold) ---
+            var gateEl = document.getElementById('viabilityGate');
+            var gateIcon = document.getElementById('vgIcon');
+            var gateStat = document.getElementById('vgStatus');
+            var gateDetail = document.getElementById('vgDetail');
+
+            if (eqPct >= 15) {
+                gateEl.className = 'viability-gate pass';
+                gateIcon.innerHTML = '&#9989;';
+                gateStat.textContent = 'VIABLE \u2014 BOOK THE APPOINTMENT';
+                gateStat.className = 'vg-status pass';
+                gateDetail.textContent = eqPct.toFixed(1) + '% equity (' + fd(equity) + ') clears the 15% threshold. This property qualifies \u2014 proceed with scheduling.';
+            } else {
+                gateEl.className = 'viability-gate fail';
+                gateIcon.innerHTML = '&#10060;';
+                gateStat.textContent = 'DOES NOT PASS VIABILITY CHECK';
+                gateStat.className = 'vg-status fail';
+                gateDetail.textContent = 'Only ' + eqPct.toFixed(1) + '% equity (' + fd(equity) + '). Needs at least 15% to qualify for RetailMax. Do not book \u2014 explore alternative strategies.';
+            }
         }
 
         function resetAll() {
